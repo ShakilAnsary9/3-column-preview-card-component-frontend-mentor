@@ -1,2 +1,2 @@
-# 3-column-preview-card-component-frontend-mentor
+# 3-column-preview-card-component
 Created with CodeSandbox
