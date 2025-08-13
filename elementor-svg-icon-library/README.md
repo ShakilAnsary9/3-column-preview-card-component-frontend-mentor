@@ -11,25 +11,31 @@ Adds a custom SVG icon library as a new tab in Elementor's icon picker.
 - In Elementor, open any icon control, then open the icon picker.
 - Select the tab labeled "SILE Icons".
 
-## Add your icons
-- Edit `assets/icons.json`.
-- Each icon should be an entry under `icons` with a `body` that contains SVG path(s) only (no outer `<svg>` tag). Example:
+## Add your icons (separate SVG files)
+- Put individual SVG files into: `assets/svg/`
+- The icon name is derived from the filename (e.g., `arrow-right.svg` => `arrow-right`).
+- SVG requirements:
+  - Include a proper `viewBox` (e.g., `viewBox="0 0 24 24"`).
+  - Inner paths should use `currentColor` for color inheritance.
+  - Outer `<svg>` tag will be stripped automatically.
+
+## How it works
+- Elementor loads icons via a JSON endpoint defined by `fetchJson`.
+- This plugin exposes an AJAX endpoint that scans `assets/svg/*.svg`, parses each, and returns a JSON in an Iconify-like format:
 
 ```json
 {
   "prefix": "sile",
   "icons": {
-    "heart": {
-      "body": "<path d=\"M12 21s-6-4.35-9-7.5C.6 10.06 2.4 6 6.6 6c2.1 0 3.4 1.2 5.4 3.2C14.94 7.2 16.2 6 18.3 6 22.5 6 24.3 10.06 21 13.5 18 16.65 12 21 12 21\" fill=\"currentColor\"/>",
-      "width": 24,
-      "height": 24
-    }
+    "check": { "body": "<path ... />", "width": 24, "height": 24 }
   }
 }
 ```
 
-- Keep `width`/`height` consistent (e.g., 24) so icons look uniform.
+## Customize
+- Change the tab label, prefix, or label icon in `elementor-svg-icon-library.php` inside `sile_register_svg_icon_library()`.
+- Default prefix is `sile`.
 
 ## Notes
-- This library uses Elementor's `elementor/icons_manager/additional_tabs` filter with `fetchJson` to load SVGs.
-- `labelIcon` uses an Elementor admin icon class for the tab indicator.
+- The AJAX endpoint is accessible at: `admin-ajax.php?action=sile_icons_json`.
+- No need to maintain a manual JSON file; just drop SVGs into `assets/svg/`.
