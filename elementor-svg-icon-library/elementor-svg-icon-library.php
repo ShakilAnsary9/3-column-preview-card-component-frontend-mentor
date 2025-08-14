@@ -3,7 +3,7 @@
  * Plugin Name: SVG Icon Library for Elementor
  * Description: Adds a custom SVG icon library as a new tab in Elementor's icon picker.
  * Version: 1.0.0
- * Author: Your Name
+ * Author: Shakil Ansary
  * License: GPL-2.0-or-later
  * Text Domain: svg-icon-library-elementor
  */
@@ -115,13 +115,13 @@ function sile_parse_svg( $svg_markup ) {
 	$body = preg_replace( '/<script[\s\S]*?<\/script>/i', '', $body );
 	$body = preg_replace( '/<\?xml[\s\S]*?\?>/i', '', $body );
 
-	if ( $body === '' ) {
-		return null;
-	}
+if ( $body === '' ) {
+return null;
+}
 
-	return array(
-		'body'   => $body,
-		'width'  => $width,
-		'height' => $height,
-	);
+return array(
+'body' => $body,
+'width' => $width,
+'height' => $height,
+);
 }
