@@ -11,17 +11,18 @@ Adds a custom SVG icon library as a new tab in Elementor's icon picker.
 - In Elementor, open any icon control, then open the icon picker.
 - Select the tab labeled "SILE Icons".
 
-## Add your icons (separate SVG files)
+## Add your icons (SVG)
 - Put individual SVG files into: `assets/svg/`
+- Run a small build step or manually update the JSON file `assets/sile-icons.json` to include your icons (this repo includes a starter JSON).
 - The icon name is derived from the filename (e.g., `arrow-right.svg` => `arrow-right`).
 - SVG requirements:
   - Include a proper `viewBox` (e.g., `viewBox="0 0 24 24"`).
   - Inner paths should use `currentColor` for color inheritance.
-  - Outer `<svg>` tag will be stripped automatically.
+  - Outer `<svg>` tag will be stripped automatically if you generate JSON programmatically.
 
 ## How it works
-- Elementor loads icons via a JSON endpoint defined by `fetchJson`.
-- This plugin exposes an AJAX endpoint that scans `assets/svg/*.svg`, parses each, and returns a JSON in an Iconify-like format:
+- Elementor loads icons via a static JSON file defined by `fetchJson`.
+- The JSON lives at `assets/sile-icons.json` and contains an Iconify-like format:
 
 ```json
 {
@@ -32,10 +33,5 @@ Adds a custom SVG icon library as a new tab in Elementor's icon picker.
 }
 ```
 
-## Customize
-- Change the tab label, prefix, or label icon in `elementor-svg-icon-library.php` inside `sile_register_svg_icon_library()`.
-- Default prefix is `sile`.
-
 ## Notes
-- The AJAX endpoint is accessible at: `admin-ajax.php?action=sile_icons_json`.
-- No need to maintain a manual JSON file; just drop SVGs into `assets/svg/`.
+- If you prefer dynamic generation, you can restore the previous AJAX endpoint and point `fetchJson` to it.

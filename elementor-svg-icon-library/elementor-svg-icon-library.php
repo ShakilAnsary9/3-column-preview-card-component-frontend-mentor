@@ -45,7 +45,8 @@ function sile_register_svg_icon_library( $tabs ) {
 		'displayPrefix' => 'sile',
 		'labelIcon'     => 'eicon-favorite',
 		'ver'           => SILE_PLUGIN_VERSION,
-		'fetchJson'     => admin_url( 'admin-ajax.php' ) . '?action=sile_icons_json&ver=' . SILE_PLUGIN_VERSION,
+		'render_type'   => 'svg',
+		'fetchJson'     => SILE_PLUGIN_URL . 'assets/sile-icons.json?ver=' . SILE_PLUGIN_VERSION,
 		'native'        => false,
 	);
 
